@@ -1,0 +1,23 @@
+{
+  "name": "vx-collapsible-tree-and-link-examples",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "vx:example"
+  ],
+  "homepage": "https://codesandbox.io/s/n3w687vmqj",
+  "main": "index.js",
+  "dependencies": {
+    "@vx/gradient": "0.0.153",
+    "@vx/group": "0.0.153",
+    "@vx/hierarchy": "0.0.153",
+    "@vx/shape": "0.0.158",
+    "classnames": "2.2.5",
+    "d3-hierarchy": "1.1.5",
+    "prop-types": "15.6.1",
+    "react": "16.3.0",
+    "react-dom": "16.3.0",
+    "react-move": "2.7.0",
+    "react-spring": "3.1.0"
+  }
+}
