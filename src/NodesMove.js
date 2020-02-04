@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { Group } from '@vx/group';
 import NodeGroup from 'react-move/NodeGroup';
 
+
 import Node from './Node';
 import { findCollapsedParent, getTopLeft } from './utils';
 
@@ -11,7 +12,7 @@ function Nodes({ nodes, layout, orientation, onNodeClick }) {
       data={nodes}
       keyAccessor={d => d.data.name}
       start={node => {
-        const parentTopLeft = getTopLeft(node.parent || { x: 0, y: 0 }, layout, orientation);
+        const parentTopLeft = getTopLeft(node.parent || { x: 200, y: 200 }, layout, orientation);
         return {
           top: parentTopLeft.top,
           left: parentTopLeft.left,
