@@ -4,13 +4,29 @@ import { Tree } from "@vx/hierarchy";
 import { LinearGradient } from "@vx/gradient";
 import { hierarchy } from "d3-hierarchy";
 
+
 // import Links from './Links';
 import Links from "./LinksMove";
 
 // import Nodes from './Nodes';
 import Nodes from "./NodesMove";
 
+//Zoom 
+
+import {ReactSVGPanZoom} from 'react-svg-pan-zoom'
+
+
+const initialTransform = {
+  scaleX: 1.27,
+  scaleY: 1.27,
+  translateX: -211.62,
+  translateY: 162.59,
+  skewX: 0,
+  skewY: 0
+};
+
 export default class extends React.Component {
+
   state = {
     layout: "cartesian",
     orientation: "horizontal",
@@ -25,19 +41,18 @@ export default class extends React.Component {
       height,
       events = false,
       margin = {
-        top: 30,
-        left: 30,
+        top: 400,
+        left: 200,
         right: 30,
-        bottom: 30
+        bottom: 300
       }
     } = this.props;
-    const { layout, orientation, linkType, stepPercent } = this.state;
+    const { layout, orientation, linkType, stepPercent, showMiniMap } = this.state;
 
     if (width < 10) return null;
 
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
-
     let origin;
     let sizeWidth;
     let sizeHeight;
@@ -111,17 +126,18 @@ export default class extends React.Component {
           />
         </div>
 
-        <svg width={width} height={height}>
+        <svg width={10000} height={20000} >
           <LinearGradient id="lg" from="#fd9b93" to="#fe6e9e" />
-          <rect width={10000} height={10000} rx={14} fill="#272b4d" />
+          <rect width={10000} height={20000} rx={1} fill="azure" />
+          
           <Tree
             top={margin.top}
             left={margin.left}
+            bottom={margin.bottom}
             root={root}
-            size={[sizeWidth, sizeHeight]}
-            nodeSize={[500, 400]}
-            separation={(a, b) => (a.parent === b.parent ? 11 : 11.5) / a.depth}
+            nodeSize={[500,500]}
           >
+
             {({ data }) => (
               <Group top={origin.y} left={origin.x}>
                 <Links
