@@ -1,7 +1,4 @@
 import React, { Fragment } from 'react';
-import{ Group } from '@vx/group';
-import { NodeGroup } from 'react-move';
-
 import Link from './Link';
 
 function findCollapsedParent(node) {
@@ -14,20 +11,20 @@ function findCollapsedParent(node) {
   }
 }
 
-function Links({ links, linkType, layout, orientation, stepPercent }) {
+function Links({ links, stepPercent }) {
   return (
     <Fragment>
       {links.map((link, i) => {
         return (
           <Link
             data={link}
-            linkType={linkType}
-            layout={layout}
-            orientation={orientation}
+            linkType={'step'}
+            layout={'cartesian'}
+            orientation={'horizontal'}
             stepPercent={stepPercent}
             stroke="#374469"
             strokeWidth="1"
-            fill="none"
+            fill="red"
             key={i}
           />
         )
