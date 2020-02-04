@@ -1,5 +1,6 @@
 export default {
-  name: 'Project',
+  name: 'ProjectX',
+  description: 'desc',
   children: [
     {
       name: 'A',
@@ -62,3 +63,5 @@ export default {
     }
   ]
 };
+
+   

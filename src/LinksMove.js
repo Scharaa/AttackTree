@@ -26,12 +26,12 @@ function Links({ links, linkType, layout, orientation, stepPercent }) {
       enter={({ source, target }) => {
         return {
           source: {
-            x: [source.x],
-            y: [source.y]
+            x: [source.x+10],
+            y: [source.y+10]
           },
           target: {
-            x: [target.x],
-            y: [target.y]
+            x: [target.x+10],
+            y: [target.y+10]
           }
         };
       }}

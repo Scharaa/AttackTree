@@ -4,26 +4,13 @@ import { Tree } from "@vx/hierarchy";
 import { LinearGradient } from "@vx/gradient";
 import { hierarchy } from "d3-hierarchy";
 
-
 // import Links from './Links';
 import Links from "./LinksMove";
 
 // import Nodes from './Nodes';
 import Nodes from "./NodesMove";
 
-//Zoom 
 
-import {ReactSVGPanZoom} from 'react-svg-pan-zoom'
-
-
-const initialTransform = {
-  scaleX: 1.27,
-  scaleY: 1.27,
-  translateX: -211.62,
-  translateY: 162.59,
-  skewX: 0,
-  skewY: 0
-};
 
 export default class extends React.Component {
 
@@ -134,6 +121,7 @@ export default class extends React.Component {
             top={margin.top}
             left={margin.left}
             bottom={margin.bottom}
+            right={margin.right}
             root={root}
             nodeSize={[500,500]}
           >
