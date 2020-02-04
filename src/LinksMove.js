@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Group } from '@vx/group';
 import { NodeGroup } from 'react-move';
 
@@ -66,7 +66,8 @@ function Links({ links, linkType, layout, orientation, stepPercent }) {
           {nodes.map(({ key, data, state }) => {
             return (
               <Link
-                data={state}
+                data={data}
+                state={state}
                 linkType={linkType}
                 layout={layout}
                 orientation={orientation}
