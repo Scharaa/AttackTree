@@ -1,25 +1,37 @@
-import React from "react";
+import React, {Fragment} from "react";
 import { Group } from "@vx/group";
 import { Tree } from "@vx/hierarchy";
 import { LinearGradient } from "@vx/gradient";
 import { hierarchy } from "d3-hierarchy";
-
+import {ReactSVGPanZoom} from 'react-svg-pan-zoom'
 // import Links from './Links';
 import Links from "./LinksMove";
 
 // import Nodes from './Nodes';
 import Nodes from "./NodesMove";
+//style
 
+import './treeStyle.css';
 
+import {UncontrolledReactSVGPanZoom} from 'react-svg-pan-zoom';
 
-export default class extends React.Component {
+export default class  extends React.Component {
 
   state = {
     layout: "cartesian",
     orientation: "horizontal",
-    linkType: "diagonal",
-    stepPercent: 0.5
+    linkType: "step",
+    stepPercent: 0.5,
+    
   };
+
+  Viewer = null
+
+  componentDidMount() {
+    this.Viewer.fitToViewer();
+  }
+
+
 
   render() {
     const {
@@ -28,15 +40,15 @@ export default class extends React.Component {
       height,
       events = false,
       margin = {
-        top: 400,
+        top: 100,
         left: 200,
-        right: 30,
+        right: 0,
         bottom: 300
       }
     } = this.props;
-    const { layout, orientation, linkType, stepPercent, showMiniMap } = this.state;
+    const { layout, orientation, stepPercent } = this.state;
 
-    if (width < 10) return null;
+    // if (width < 10) return null;
 
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
@@ -52,7 +64,7 @@ export default class extends React.Component {
       sizeWidth = 2 * Math.PI;
       sizeHeight = Math.min(innerWidth, innerHeight) / 2;
     } else {
-      origin = { x: 0, y: 0 };
+      origin = { x: 0, y: 400 };
       if (orientation === "vertical") {
         sizeWidth = innerWidth;
         sizeHeight = innerHeight;
@@ -69,7 +81,7 @@ export default class extends React.Component {
 
     return (
       <div>
-        <div>
+        {/* <div>
           <label>layout:</label>
           <select
             onChange={e => this.setState({ layout: e.target.value })}
@@ -112,34 +124,49 @@ export default class extends React.Component {
             disabled={linkType !== "step" || layout === "polar"}
           />
         </div>
+      
+       */}
+        <button className="tree-btn" onClick={() => this.Viewer.zoomOnViewerCenter(1.1)}>Zoom in</button>
+        <button className="tree-btn" onClick={() => this.Viewer.fitSelection(40, 40, 2000, 2000)}>Zoom area 200x200</button>
+        <button className="tree-btn" onClick={() => this.Viewer.fitToViewer()}>Fit</button>
 
-        <svg width={10000} height={20000} >
-          <LinearGradient id="lg" from="#fd9b93" to="#fe6e9e" />
-          <rect width={10000} height={20000} rx={1} fill="azure" />
-          
-          <Tree
+        <hr/>
+        <Fragment className='tree-container'>
+        <UncontrolledReactSVGPanZoom
+          width={2000} height={900}
+          ref={Viewer => this.Viewer = Viewer}
+
+          onClick={event => console.log('click', event.x, event.y, event.originalEvent)}
+        >
+       
+        <svg  width={2000} height={900} >
+            
+        <rect width="2000" height="2000" fill="#616264" />
+        
+      <Tree
             top={margin.top}
             left={margin.left}
             bottom={margin.bottom}
             right={margin.right}
             root={root}
-            nodeSize={[500,500]}
+            nodeSize={[400,400]}
+          
           >
 
             {({ data }) => (
               <Group top={origin.y} left={origin.x}>
                 <Links
                   links={data.links()}
-                  linkType={linkType}
-                  layout={layout}
-                  orientation={orientation}
+                  linkType={'step'}
+                  layout={'cartesian'}
+                  orientation={'horizontal'}
                   stepPercent={stepPercent}
                 />
 
                 <Nodes
                   nodes={data.descendants()}
-                  layout={layout}
-                  orientation={orientation}
+                  layout={'cartesian'}
+                  orientation={'horizontal'}
                   onNodeClick={node => {
                     if (!node.data.isExpanded) {
                       node.data.x0 = node.x;
@@ -152,7 +179,14 @@ export default class extends React.Component {
               </Group>
             )}
           </Tree>
+       
+       
+        
+          
         </svg>
+       
+        </UncontrolledReactSVGPanZoom>
+        </Fragment>
       </div>
     );
   }

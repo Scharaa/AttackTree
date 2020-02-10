@@ -1,0 +1,19 @@
+.App {
+	font-family: sans-serif;
+	text-align: center;
+}
+.tree-container {
+  background-size: cover;
+
+}
+
+svg {
+	position: inherit;
+	top: 0;
+	left: 0;
+	height: auto;
+	width: auto;
+	color: whitesmoke;
+
+}
+
