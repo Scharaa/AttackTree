@@ -40,10 +40,10 @@ export default class  extends React.Component {
       height,
       events = false,
       margin = {
-        top: 100,
+        top: 0,
         left: 200,
         right: 0,
-        bottom: 300
+        bottom: 200
       }
     } = this.props;
     const { layout, orientation, stepPercent } = this.state;
@@ -127,20 +127,20 @@ export default class  extends React.Component {
       
        */}
         <button className="tree-btn" onClick={() => this.Viewer.zoomOnViewerCenter(1.1)}>Zoom in</button>
-        <button className="tree-btn" onClick={() => this.Viewer.fitSelection(40, 40, 2000, 2000)}>Zoom area 200x200</button>
+        <button className="tree-btn" onClick={() => this.Viewer.fitSelection(0, 0, 2000, 2000)}>Zoom area</button>
         <button className="tree-btn" onClick={() => this.Viewer.fitToViewer()}>Fit</button>
 
         <hr/>
         <Fragment className='tree-container'>
         <UncontrolledReactSVGPanZoom
-          width={2000} height={900}
+          width={2000} height={2000}
           ref={Viewer => this.Viewer = Viewer}
 
           onClick={event => console.log('click', event.x, event.y, event.originalEvent)}
         >
        
-        <svg  width={2000} height={900} >
-            
+        <svg viewBox={'0 0 900 900'}>
+            <g>
         <rect width="2000" height="2000" fill="#616264" />
         
       <Tree
@@ -149,7 +149,7 @@ export default class  extends React.Component {
             bottom={margin.bottom}
             right={margin.right}
             root={root}
-            nodeSize={[400,400]}
+            nodeSize={[200,400]}
           
           >
 
@@ -181,7 +181,7 @@ export default class  extends React.Component {
           </Tree>
        
        
-        
+          </g>
           
         </svg>
        
