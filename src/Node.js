@@ -1,11 +1,9 @@
 import React, { Fragment } from 'react';
 
-//Button
-// import { Button, ButtonGroup } from 'reactstrap';
 
 function Node({ node, onClick }) {
 	const width = 300;
-	const height = 200;
+	const height = 100;
 	const innerY = -height / 2;
 	const innerX = -width / 2;
 
@@ -22,16 +20,16 @@ function Node({ node, onClick }) {
 						fill={'white'}
 						stroke={node.data.children ? '#03c0dc' : '#26deb0'}
 						strokeWidth={1}
-						strokeDasharray={!node.data.children ? '2,2' : '0'}
-						strokeOpacity={!node.data.children ? 0.6 : 1}
-						rx={!node.data.children ? 10 : 0}
+						strokeDasharray={ '0'}
+						strokeOpacity={ 1}
+						rx={ 0}
 						onClick={onClick}
 					/>
 					<text
 						className="projectclass"
 						x={innerX + 80}
 						y={innerY + 45}
-						fontSize={20}
+						fontSize={15}
 						fontFamily="Arial"
 						textAnchor={'middle'}
 						style={{ pointerEvents: 'none' }}
@@ -42,7 +40,7 @@ function Node({ node, onClick }) {
 							{node.data.description}
 						</tspan>
 					</text>
-					<foreignObject width="100" height="100" x={innerX + 20} y={innerY + 140}>
+					{/* <foreignObject width="100" height="100" x={innerX + 20} y={innerY + 140}>
 						<button fontSize={20}>New Asset</button>
 					</foreignObject>
           <text  x={innerX+220} y={innerY + 154}	style={{ pointerEvents: 'none' }}
@@ -53,23 +51,75 @@ function Node({ node, onClick }) {
 
 <input type="checkbox" checked="checked" cursor='pointer'></input>
   <span class="checkmark"></span>
-					</foreignObject>
+					</foreignObject> */}
 				</Fragment>
 			)}
 			{node.depth !== 0 && (
-				<rect
+				<Fragment>
+						<rect
 					height={height}
 					width={width}
 					y={-height / 2}
 					x={-width / 2}
-					fill={'#272b4d'}
-					stroke={node.data.children ? '#03c0dc' : '#26deb0'}
+					fill={'white'}
+					stroke={'#26deb0'}
 					strokeWidth={1}
-					strokeDasharray={!node.data.children ? '2,2' : '0'}
-					strokeOpacity={!node.data.children ? 0.6 : 1}
-					rx={!node.data.children ? 10 : 0}
+					strokeDasharray={'0'}
+					strokeOpacity={1}
+					rx={0}
 					onClick={onClick}
 				/>
+					<text
+						className="projectclass"
+						x={innerX + 80}
+						y={innerY + 45}
+						fontSize={15}
+						fontFamily="Arial"
+						textAnchor={'middle'}
+						style={{ pointerEvents: 'none' }}
+						fill={'black'}
+					>
+						Entity: {node.data.name}
+						<tspan x={innerX + 30} y={innerY + 70} fontSize={15}>
+							{node.data.description}
+						</tspan>
+					</text>
+				</Fragment>
+			
+			)}
+
+{node.entity_type === 'asset' && (
+				<Fragment>
+						<rect
+					height={height}
+					width={width}
+					y={-height / 2}
+					x={-width / 2}
+					fill={'white'}
+					stroke={'#26deb0'}
+					strokeWidth={1}
+					strokeDasharray={'0'}
+					strokeOpacity={1}
+					rx={0}
+					onClick={onClick}
+				/>
+					<text
+						className="projectclass"
+						x={innerX + 80}
+						y={innerY + 45}
+						fontSize={15}
+						fontFamily="Arial"
+						textAnchor={'middle'}
+						style={{ pointerEvents: 'none' }}
+						fill={'black'}
+					>
+						Entity: {node.data.name}
+						<tspan x={innerX + 30} y={innerY + 70} fontSize={15}>
+							{node.data.description}
+						</tspan>
+					</text>
+				</Fragment>
+			
 			)}
 		</Fragment>
 	);
